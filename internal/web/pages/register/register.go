@@ -23,12 +23,6 @@ func getRegisterFormValue(e *core.RequestEvent) RegisterFormValue {
 	}
 }
 
-func GetRegisterRoute(e *core.RequestEvent) error {
-	component := RegisterPage()
-	e.Response.Header().Set("Content-Type", "text/html; charset=utf-8")
-	return component.Render(e.Request.Context(), e.Response)
-}
-
 func PostRegisterRoute(e *core.RequestEvent) error {
 	form := getRegisterFormValue(e)
 	// TODO: validate form
@@ -47,7 +41,7 @@ func PostRegisterRoute(e *core.RequestEvent) error {
 
 func PostLogoutRoute(e *core.RequestEvent) error {
 	removeAuthToken(e)
-	return e.Redirect(302, "/auth/register")
+	return e.Redirect(302, "/auth/login")
 }
 
 func registerUser(e *core.RequestEvent, email string, password string, repeatPassword string) error {

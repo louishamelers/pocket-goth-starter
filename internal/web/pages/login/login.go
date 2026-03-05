@@ -21,12 +21,6 @@ func getLoginFormValue(e *core.RequestEvent) LoginFormValue {
 	}
 }
 
-func GetLoginRoute(e *core.RequestEvent) error {
-	component := LoginPage()
-	e.Response.Header().Set("Content-Type", "text/html; charset=utf-8")
-	return component.Render(e.Request.Context(), e.Response)
-}
-
 func PostLoginRoute(e *core.RequestEvent) error {
 	form := getLoginFormValue(e)
 	// TODO: validate form

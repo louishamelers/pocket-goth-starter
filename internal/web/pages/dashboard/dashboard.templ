@@ -1,0 +1,16 @@
+package dashboard
+
+import "pocket-goth-starter/internal/web/components"
+
+templ DashboardPage() {
+	@components.DocType()
+	@components.Head()
+	@components.Body(Dashboard())
+}
+
+templ Dashboard() {
+	<p>hello!</p>
+	<form method="post" action="/auth/logout" hx-boost="true">
+		<button type="submit">Logout</button>
+	</form>
+}

@@ -4,6 +4,7 @@ import (
 	"log"
 	"os"
 	"pocket-goth-starter/internal/web/auth"
+	"pocket-goth-starter/internal/web/handlers"
 	"pocket-goth-starter/internal/web/middleware"
 	"pocket-goth-starter/internal/web/pages"
 	"pocket-goth-starter/internal/web/routes"
@@ -34,7 +35,7 @@ func main() {
 
 func initRoutes(e *core.ServeEvent) {
 	unAuthGroup := e.Router.Group("").BindFunc(middleware.UnAuthGuard)
-	unAuthGroup.GET(routes.LoginRoute, utils.RenderRoute(pages.LoginPage))
+	unAuthGroup.GET(routes.LoginRoute, handlers.HandleLogin())
 	unAuthGroup.POST(routes.LoginRoute, auth.PostLogin)
 	unAuthGroup.GET(routes.RegisterRoute, utils.RenderRoute(pages.RegisterPage))
 	unAuthGroup.POST(routes.RegisterRoute, auth.PostRegister)

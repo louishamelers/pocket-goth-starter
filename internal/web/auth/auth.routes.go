@@ -14,7 +14,7 @@ func PostLogin(e *core.RequestEvent) error {
 	err := LoginUser(e, form.Email, form.Password)
 
 	if err != nil {
-		fmt.Println(err)
+		return e.Redirect(302, routes.LoginRoute+"?error=invalid_credentials")
 	}
 
 	return e.Redirect(302, routes.DashboardRoute)

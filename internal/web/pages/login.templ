@@ -3,20 +3,22 @@ package pages
 import (
 	"pocket-goth-starter/internal/web/auth"
 	"pocket-goth-starter/internal/web/components"
+	"pocket-goth-starter/internal/web/components/alert"
 	"pocket-goth-starter/internal/web/components/button"
 	"pocket-goth-starter/internal/web/components/card"
+	"pocket-goth-starter/internal/web/components/icon"
 	"pocket-goth-starter/internal/web/components/input"
 	"pocket-goth-starter/internal/web/components/label"
 	"pocket-goth-starter/internal/web/routes"
 )
 
-templ LoginPage() {
+templ LoginPage(errorMessage string) {
 	@components.DocType()
 	@components.Head()
-	@components.Body(LoginForm(auth.LoginFormValue{}, nil))
+	@components.Body(LoginForm(auth.LoginFormValue{}, errorMessage))
 }
 
-templ LoginForm(form auth.LoginFormValue, err error) {
+templ LoginForm(form auth.LoginFormValue, errorMessage string) {
 	<div class="w-full max-w-sm mx-auto">
 		@card.Card() {
 			@card.Header() {
@@ -26,35 +28,47 @@ templ LoginForm(form auth.LoginFormValue, err error) {
 			}
 			<form method="POST" action={ routes.LoginRoute } hx-boost="true">
 				@card.Content() {
-					<div class="w-full max-w-sm grid gap-2">
-						@label.Label(label.Props{
-							For: "email",
-						}) {
-							Email
+					<div class="flex flex-col gap-4">
+						<div class="w-full max-w-sm grid gap-2">
+							@label.Label(label.Props{
+								For: "email",
+							}) {
+								Email
+							}
+							@input.Input(input.Props{
+								ID:          "email",
+								Name:        "email",
+								Placeholder: "Enter project email",
+								Value:       form.Email,
+								Type:        "email",
+							})
+						</div>
+						<div class="w-full max-w-sm grid gap-2">
+							@label.Label(label.Props{
+								For: "password",
+							}) {
+								Password
+							}
+							@input.Input(input.Props{
+								ID:          "password",
+								Name:        "password",
+								Placeholder: "Enter project password",
+								Value:       form.Password,
+								Type:        "password",
+							})
+						</div>
+						if errorMessage != "" {
+							@alert.Alert(alert.Props{Variant: alert.VariantDestructive}) {
+								@icon.TriangleAlert()
+								@alert.Title() {
+									Error
+								}
+								@alert.Description() {
+									{ errorMessage }
+								}
+							}
 						}
-						@input.Input(input.Props{
-							ID:          "email",
-							Placeholder: "Enter project email",
-							Value:       form.Email,
-							Type:        "email",
-						})
 					</div>
-					<div class="w-full max-w-sm grid gap-2">
-						@label.Label(label.Props{
-							For: "password",
-						}) {
-							Password
-						}
-						@input.Input(input.Props{
-							ID:          "password",
-							Placeholder: "Enter project password",
-							Value:       form.Password,
-							Type:        "password",
-						})
-					</div>
-					if err != nil {
-						<p>{ err.Error() }</p>
-					}
 				}
 				@card.Footer() {
 					@button.Button(button.Props{

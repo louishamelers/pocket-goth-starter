@@ -1,0 +1,7 @@
+{
+  "componentsDir": "internal/web/components",
+  "utilsDir": "internal/web/utils",
+  "moduleName": "pocket-goth-starter",
+  "jsDir": "internal/web/assets",
+  "jsPublicPath": "/internal/web/assets"
+}

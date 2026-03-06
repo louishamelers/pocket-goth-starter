@@ -2,6 +2,7 @@ package pages
 
 import (
 	"pocket-goth-starter/internal/web/components"
+	"pocket-goth-starter/internal/web/components/button"
 	"pocket-goth-starter/internal/web/routes"
 )
 
@@ -14,6 +15,11 @@ templ DashboardPage() {
 templ Dashboard() {
 	<p>hello!</p>
 	<form method="post" action={ routes.LogoutRoute } hx-boost="true">
-		<button type="submit">Logout</button>
+		@button.Button(button.Props{
+			Type:    "submit",
+			Variant: button.VariantDestructive,
+		}) {
+			Logout
+		}
 	</form>
 }

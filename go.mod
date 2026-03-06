@@ -3,6 +3,7 @@ module pocket-goth-starter
 go 1.25.6
 
 require (
+	github.com/Oudwins/tailwind-merge-go v0.2.1
 	github.com/a-h/templ v0.3.977
 	github.com/pocketbase/pocketbase v0.36.5
 )

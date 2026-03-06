@@ -23,6 +23,22 @@ func AuthGuard(e *core.RequestEvent) error {
 	return e.Next()
 }
 
+func UnAuthGuard(e *core.RequestEvent) error {
+	tokenCookie, err := e.Request.Cookie(AuthCookieName)
+
+	if err != nil {
+		return e.Next()
+	}
+
+	token := tokenCookie.Value
+	if _, err := e.App.FindAuthRecordByToken(token, core.TokenTypeAuth); err != nil {
+		return e.Next()
+	}
+
+	e.Redirect(302, "/app/dashboard")
+	return nil
+}
+
 func LoadAuthContext(e *core.RequestEvent) error {
 	tokenCookie, err := e.Request.Cookie(AuthCookieName)
 	if err != nil {

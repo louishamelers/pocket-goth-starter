@@ -33,13 +33,11 @@ func PostRegisterRoute(e *core.RequestEvent) error {
 		fmt.Println(err)
 	}
 
-	// just show the registerPage
-	component := RegisterPage()
-	e.Response.Header().Set("Content-Type", "text/html; charset=utf-8")
-	return component.Render(e.Request.Context(), e.Response)
+	return e.Redirect(302, "/app/dashboard")
 }
 
 func PostLogoutRoute(e *core.RequestEvent) error {
+	fmt.Println("Hello")
 	removeAuthToken(e)
 	return e.Redirect(302, "/auth/login")
 }

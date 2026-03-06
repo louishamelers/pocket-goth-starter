@@ -34,7 +34,7 @@ func main() {
 }
 
 func initAuthRoutes(e *core.ServeEvent) {
-	authGroup := e.Router.Group("/auth")
+	authGroup := e.Router.Group("/auth").BindFunc(middleware.UnAuthGuard)
 
 	// Register
 	authGroup.GET("/register", utils.RenderRoute(registerPage.RegisterPage))
@@ -44,8 +44,8 @@ func initAuthRoutes(e *core.ServeEvent) {
 	authGroup.GET("/login", utils.RenderRoute(loginPage.LoginPage))
 	authGroup.POST("/login", loginPage.PostLoginRoute)
 
-	// Logout
-	authGroup.POST("/logout", registerPage.PostLogoutRoute)
+	// Logout (not part of authgroup)
+	e.Router.POST("/auth/logout", registerPage.PostLogoutRoute)
 }
 
 func initAppRoutes(e *core.ServeEvent) {

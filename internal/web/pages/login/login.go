@@ -31,10 +31,7 @@ func PostLoginRoute(e *core.RequestEvent) error {
 		fmt.Println(err)
 	}
 
-	// just show the registerPage
-	component := LoginPage()
-	e.Response.Header().Set("Content-Type", "text/html; charset=utf-8")
-	return component.Render(e.Request.Context(), e.Response)
+	return e.Redirect(302, "/app/dashboard")
 }
 
 func loginUser(e *core.RequestEvent, email string, password string) error {

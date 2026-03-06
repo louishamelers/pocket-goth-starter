@@ -8,7 +8,10 @@ package pages
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-import "pocket-goth-starter/internal/web/components"
+import (
+	"pocket-goth-starter/internal/web/components"
+	"pocket-goth-starter/internal/web/routes"
+)
 
 func DashboardPage() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
@@ -68,7 +71,20 @@ func Dashboard() templ.Component {
 			templ_7745c5c3_Var2 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<p>hello!</p><form method=\"post\" action=\"/auth/logout\" hx-boost=\"true\"><button type=\"submit\">Logout</button></form>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<p>hello!</p><form method=\"post\" action=\"")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var3 templ.SafeURL
+		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinURLErrs(routes.LogoutRoute)
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/web/pages/dashboard.templ`, Line: 16, Col: 48}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "\" hx-boost=\"true\"><button type=\"submit\">Logout</button></form>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

@@ -3,6 +3,7 @@ package pages
 import (
 	"pocket-goth-starter/internal/web/auth"
 	"pocket-goth-starter/internal/web/components"
+	"pocket-goth-starter/internal/web/routes"
 )
 
 templ RegisterPage() {
@@ -12,7 +13,7 @@ templ RegisterPage() {
 }
 
 templ RegisterForm(form auth.RegisterFormValue, err error) {
-	<form method="POST" action="/auth/register" hx-boost="true">
+	<form method="POST" action={ routes.RegisterRoute } hx-boost="true">
 		<div>
 			<label>Email</label>
 			<input type="email" name="email" id="email" value={ form.Email }/>

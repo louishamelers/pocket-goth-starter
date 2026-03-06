@@ -3,6 +3,10 @@ package pages
 import (
 	"pocket-goth-starter/internal/web/auth"
 	"pocket-goth-starter/internal/web/components"
+	"pocket-goth-starter/internal/web/components/button"
+	"pocket-goth-starter/internal/web/components/card"
+	"pocket-goth-starter/internal/web/components/input"
+	"pocket-goth-starter/internal/web/components/label"
 	"pocket-goth-starter/internal/web/routes"
 )
 
@@ -13,18 +17,54 @@ templ LoginPage() {
 }
 
 templ LoginForm(form auth.LoginFormValue, err error) {
-	<form method="POST" action={ routes.LoginRoute } hx-boost="true">
-		<div>
-			<label>Email</label>
-			<input type="email" name="email" id="email" value={ form.Email }/>
-		</div>
-		<div>
-			<label>Password</label>
-			<input type="password" name="password" id="password"/>
-		</div>
-		if err != nil {
-			<p>{ err.Error() }</p>
+	<div class="w-full max-w-sm mx-auto">
+		@card.Card() {
+			@card.Header() {
+				@card.Title() {
+					Login
+				}
+			}
+			<form method="POST" action={ routes.LoginRoute } hx-boost="true">
+				@card.Content() {
+					<div class="w-full max-w-sm grid gap-2">
+						@label.Label(label.Props{
+							For: "email",
+						}) {
+							Email
+						}
+						@input.Input(input.Props{
+							ID:          "email",
+							Placeholder: "Enter project email",
+							Value:       form.Email,
+							Type:        "email",
+						})
+					</div>
+					<div class="w-full max-w-sm grid gap-2">
+						@label.Label(label.Props{
+							For: "password",
+						}) {
+							Password
+						}
+						@input.Input(input.Props{
+							ID:          "password",
+							Placeholder: "Enter project password",
+							Value:       form.Password,
+							Type:        "password",
+						})
+					</div>
+					if err != nil {
+						<p>{ err.Error() }</p>
+					}
+				}
+				@card.Footer() {
+					@button.Button(button.Props{
+						Type:  "submit",
+						Class: "w-full",
+					}) {
+						Login
+					}
+				}
+			</form>
 		}
-		<button type="submit">Login</button>
-	</form>
+	</div>
 }

@@ -1,7 +1,6 @@
 package auth
 
 import (
-	"fmt"
 	"pocket-goth-starter/internal/web/routes"
 
 	"github.com/pocketbase/pocketbase/core"
@@ -27,7 +26,7 @@ func PostRegister(e *core.RequestEvent) error {
 	err := RegisterUser(e, form.Email, form.Password, form.PasswordRepeat)
 
 	if err != nil {
-		fmt.Println(err)
+		return e.Redirect(302, routes.RegisterRoute+"?error="+err.Error())
 	}
 
 	return e.Redirect(302, routes.DashboardRoute)

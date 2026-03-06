@@ -37,7 +37,7 @@ func initRoutes(e *core.ServeEvent) {
 	unAuthGroup := e.Router.Group("").BindFunc(middleware.UnAuthGuard)
 	unAuthGroup.GET(routes.LoginRoute, handlers.HandleLogin())
 	unAuthGroup.POST(routes.LoginRoute, auth.PostLogin)
-	unAuthGroup.GET(routes.RegisterRoute, utils.RenderRoute(pages.RegisterPage))
+	unAuthGroup.GET(routes.RegisterRoute, handlers.HandleRegister())
 	unAuthGroup.POST(routes.RegisterRoute, auth.PostRegister)
 
 	e.Router.POST(routes.LogoutRoute, auth.PostLogout)

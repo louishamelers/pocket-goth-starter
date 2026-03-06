@@ -1,18 +1,21 @@
 package login
 
-import "pocket-goth-starter/internal/web/components"
+import (
+	"pocket-goth-starter/internal/web/auth"
+	"pocket-goth-starter/internal/web/components"
+)
 
 templ LoginPage() {
 	@components.DocType()
 	@components.Head()
-	@components.Body(LoginForm(LoginFormValue{}, nil))
+	@components.Body(LoginForm(auth.LoginFormValue{}, nil))
 }
 
-templ LoginForm(form LoginFormValue, err error) {
+templ LoginForm(form auth.LoginFormValue, err error) {
 	<form method="POST" action="/auth/login" hx-boost="true">
 		<div>
 			<label>Email</label>
-			<input type="email" name="email" id="email" value={ form.email }/>
+			<input type="email" name="email" id="email" value={ form.Email }/>
 		</div>
 		<div>
 			<label>Password</label>

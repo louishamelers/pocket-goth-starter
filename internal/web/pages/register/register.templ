@@ -1,18 +1,21 @@
 package register
 
-import "pocket-goth-starter/internal/web/components"
+import (
+	"pocket-goth-starter/internal/web/auth"
+	"pocket-goth-starter/internal/web/components"
+)
 
 templ RegisterPage() {
 	@components.DocType()
 	@components.Head()
-	@components.Body(RegisterForm(RegisterFormValue{}, nil))
+	@components.Body(RegisterForm(auth.RegisterFormValue{}, nil))
 }
 
-templ RegisterForm(form RegisterFormValue, err error) {
+templ RegisterForm(form auth.RegisterFormValue, err error) {
 	<form method="POST" action="/auth/register" hx-boost="true">
 		<div>
 			<label>Email</label>
-			<input type="email" name="email" id="email" value={ form.email }/>
+			<input type="email" name="email" id="email" value={ form.Email }/>
 		</div>
 		<div>
 			<label>Password</label>

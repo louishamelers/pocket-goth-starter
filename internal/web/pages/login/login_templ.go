@@ -8,7 +8,10 @@ package login
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-import "pocket-goth-starter/internal/web/components"
+import (
+	"pocket-goth-starter/internal/web/auth"
+	"pocket-goth-starter/internal/web/components"
+)
 
 func LoginPage() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
@@ -39,7 +42,7 @@ func LoginPage() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = components.Body(LoginForm(LoginFormValue{}, nil)).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = components.Body(LoginForm(auth.LoginFormValue{}, nil)).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -47,7 +50,7 @@ func LoginPage() templ.Component {
 	})
 }
 
-func LoginForm(form LoginFormValue, err error) templ.Component {
+func LoginForm(form auth.LoginFormValue, err error) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -73,9 +76,9 @@ func LoginForm(form LoginFormValue, err error) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var3 string
-		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(form.email)
+		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(form.Email)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/web/pages/login/login.templ`, Line: 15, Col: 65}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/web/pages/login/login.templ`, Line: 18, Col: 65}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 		if templ_7745c5c3_Err != nil {
@@ -93,7 +96,7 @@ func LoginForm(form LoginFormValue, err error) templ.Component {
 			var templ_7745c5c3_Var4 string
 			templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(err.Error())
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/web/pages/login/login.templ`, Line: 22, Col: 19}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/web/pages/login/login.templ`, Line: 25, Col: 19}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 			if templ_7745c5c3_Err != nil {

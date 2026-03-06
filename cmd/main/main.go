@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"os"
+	"pocket-goth-starter/internal/web/auth"
 	middleware "pocket-goth-starter/internal/web/middleware"
 	dashboardPage "pocket-goth-starter/internal/web/pages/dashboard"
 	loginPage "pocket-goth-starter/internal/web/pages/login"
@@ -38,14 +39,14 @@ func initAuthRoutes(e *core.ServeEvent) {
 
 	// Register
 	authGroup.GET("/register", utils.RenderRoute(registerPage.RegisterPage))
-	authGroup.POST("/register", registerPage.PostRegisterRoute)
+	authGroup.POST("/register", auth.PostRegister)
 
 	// Login
 	authGroup.GET("/login", utils.RenderRoute(loginPage.LoginPage))
-	authGroup.POST("/login", loginPage.PostLoginRoute)
+	authGroup.POST("/login", auth.PostLogin)
 
 	// Logout (not part of authgroup)
-	e.Router.POST("/auth/logout", registerPage.PostLogoutRoute)
+	e.Router.POST("/auth/logout", auth.PostLogout)
 }
 
 func initAppRoutes(e *core.ServeEvent) {

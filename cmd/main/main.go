@@ -5,9 +5,7 @@ import (
 	"os"
 	"pocket-goth-starter/internal/web/auth"
 	middleware "pocket-goth-starter/internal/web/middleware"
-	dashboardPage "pocket-goth-starter/internal/web/pages/dashboard"
-	loginPage "pocket-goth-starter/internal/web/pages/login"
-	registerPage "pocket-goth-starter/internal/web/pages/register"
+	"pocket-goth-starter/internal/web/pages"
 	"pocket-goth-starter/internal/web/utils"
 
 	"github.com/pocketbase/pocketbase"
@@ -38,11 +36,11 @@ func initAuthRoutes(e *core.ServeEvent) {
 	authGroup := e.Router.Group("/auth").BindFunc(middleware.UnAuthGuard)
 
 	// Register
-	authGroup.GET("/register", utils.RenderRoute(registerPage.RegisterPage))
+	authGroup.GET("/register", utils.RenderRoute(pages.RegisterPage))
 	authGroup.POST("/register", auth.PostRegister)
 
 	// Login
-	authGroup.GET("/login", utils.RenderRoute(loginPage.LoginPage))
+	authGroup.GET("/login", utils.RenderRoute(pages.LoginPage))
 	authGroup.POST("/login", auth.PostLogin)
 
 	// Logout (not part of authgroup)
@@ -53,5 +51,5 @@ func initAppRoutes(e *core.ServeEvent) {
 	appGroup := e.Router.Group("/app").BindFunc(middleware.LoadAuthContext, middleware.AuthGuard)
 
 	// Dashboard
-	appGroup.GET("/dashboard", utils.RenderRoute(dashboardPage.DashboardPage))
+	appGroup.GET("/dashboard", utils.RenderRoute(pages.DashboardPage))
 }

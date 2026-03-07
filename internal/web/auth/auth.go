@@ -9,12 +9,12 @@ import (
 func RegisterUser(e *core.RequestEvent, email string, password string, repeatPassword string) error {
 	user, _ := e.App.FindAuthRecordByEmail("users", email)
 	if user != nil {
-		return fmt.Errorf("email already exists!")
+		return fmt.Errorf("A user with that email already exists")
 	}
 
 	// TODO: move this to validation
 	if repeatPassword != password {
-		return fmt.Errorf("passwords do not match!")
+		return fmt.Errorf("The entered passwords do not match")
 	}
 
 	userCollection, err := e.App.FindCollectionByNameOrId("users")

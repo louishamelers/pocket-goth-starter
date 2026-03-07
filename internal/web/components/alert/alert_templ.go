@@ -328,7 +328,7 @@ func Description(props ...DescriptionProps) templ.Component {
 func variantClasses(variant Variant) string {
 	switch variant {
 	case VariantDestructive:
-		return "text-destructive bg-card [&>svg]:text-current *:data-[slot=alert-description]:text-destructive/90"
+		return "text-destructive bg-destructive/10 border-destructive/30  [&>svg]:text-current *:data-[slot=alert-description]:text-destructive/90"
 	default:
 		return "bg-card text-card-foreground"
 	}

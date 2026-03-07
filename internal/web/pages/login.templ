@@ -39,7 +39,7 @@ templ LoginForm(form auth.LoginFormValue, errorMessage string) {
 							@input.Input(input.Props{
 								ID:          "email",
 								Name:        "email",
-								Placeholder: "Enter project email",
+								Placeholder: "example@email.com",
 								Value:       form.Email,
 								Type:        "email",
 							})
@@ -53,7 +53,7 @@ templ LoginForm(form auth.LoginFormValue, errorMessage string) {
 							@input.Input(input.Props{
 								ID:          "password",
 								Name:        "password",
-								Placeholder: "Enter project password",
+								Placeholder: "*******",
 								Value:       form.Password,
 								Type:        "password",
 							})

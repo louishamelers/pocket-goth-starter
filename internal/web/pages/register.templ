@@ -39,7 +39,7 @@ templ RegisterForm(form auth.RegisterFormValue, errorMessage string) {
 							@input.Input(input.Props{
 								ID:          "email",
 								Name:        "email",
-								Placeholder: "Enter project email",
+								Placeholder: "example@email.com",
 								Value:       form.Email,
 								Type:        "email",
 							})
@@ -53,7 +53,7 @@ templ RegisterForm(form auth.RegisterFormValue, errorMessage string) {
 							@input.Input(input.Props{
 								ID:          "password",
 								Name:        "password",
-								Placeholder: "Enter project password",
+								Placeholder: "*******",
 								Value:       form.Password,
 								Type:        "password",
 							})
@@ -67,7 +67,7 @@ templ RegisterForm(form auth.RegisterFormValue, errorMessage string) {
 							@input.Input(input.Props{
 								ID:          "passwordRepeat",
 								Name:        "passwordRepeat",
-								Placeholder: "Enter project password",
+								Placeholder: "*******",
 								Value:       form.PasswordRepeat,
 								Type:        "password",
 							})

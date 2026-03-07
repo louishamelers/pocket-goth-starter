@@ -195,7 +195,7 @@ func RegisterForm(form auth.RegisterFormValue, errorMessage string) templ.Compon
 				templ_7745c5c3_Err = input.Input(input.Props{
 					ID:          "email",
 					Name:        "email",
-					Placeholder: "Enter project email",
+					Placeholder: "example@email.com",
 					Value:       form.Email,
 					Type:        "email",
 				}).Render(ctx, templ_7745c5c3_Buffer)
@@ -233,7 +233,7 @@ func RegisterForm(form auth.RegisterFormValue, errorMessage string) templ.Compon
 				templ_7745c5c3_Err = input.Input(input.Props{
 					ID:          "password",
 					Name:        "password",
-					Placeholder: "Enter project password",
+					Placeholder: "*******",
 					Value:       form.Password,
 					Type:        "password",
 				}).Render(ctx, templ_7745c5c3_Buffer)
@@ -271,7 +271,7 @@ func RegisterForm(form auth.RegisterFormValue, errorMessage string) templ.Compon
 				templ_7745c5c3_Err = input.Input(input.Props{
 					ID:          "passwordRepeat",
 					Name:        "passwordRepeat",
-					Placeholder: "Enter project password",
+					Placeholder: "*******",
 					Value:       form.PasswordRepeat,
 					Type:        "password",
 				}).Render(ctx, templ_7745c5c3_Buffer)

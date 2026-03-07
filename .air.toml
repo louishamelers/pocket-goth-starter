@@ -1,5 +1,9 @@
 [build]
-pre_cmd = ["templ generate","gotailwind -i ./internal/web/assets/global.css -o ./tmp/pb_public/tailwind.css --minify"]
+pre_cmd = [
+    "templ generate",
+    "gotailwind -i ./internal/web/assets/global.css -o ./tmp/pb_public/tailwind.css --minify",
+    "mkdir -p ./tmp/pb_public/scripts && cp -r ./internal/web/assets/scripts/* ./tmp/pb_public/scripts/"
+]
 # It's not necessary to trigger build each time file changes if it's too frequent.
 delay = 1000
 

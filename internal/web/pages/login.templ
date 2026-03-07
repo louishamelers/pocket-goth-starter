@@ -80,12 +80,9 @@ templ LoginForm(form auth.LoginFormValue, errorMessage string) {
 						<div class="w-full max-w-sm">
 							@divider.OrDivider()
 						</div>
-						@button.Button(button.Props{
-							Variant: button.VariantLink,
-							Href:    routes.RegisterRoute,
-						}) {
-							register
-						}
+						<p class="text-center text-sm text-muted-foreground mx-auto max-w-7xl">
+							Don't have an account?{ " " }<a href={ routes.RegisterRoute } class="text-primary underline underline-offset-4">Sign up</a>.
+						</p>
 					</div>
 				}
 			</form>

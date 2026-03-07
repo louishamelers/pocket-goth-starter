@@ -6,6 +6,7 @@ import (
 	"pocket-goth-starter/internal/web/components/alert"
 	"pocket-goth-starter/internal/web/components/button"
 	"pocket-goth-starter/internal/web/components/card"
+	"pocket-goth-starter/internal/web/components/divider"
 	"pocket-goth-starter/internal/web/components/icon"
 	"pocket-goth-starter/internal/web/components/input"
 	"pocket-goth-starter/internal/web/components/label"
@@ -68,15 +69,22 @@ templ LoginForm(form auth.LoginFormValue, errorMessage string) {
 								}
 							}
 						}
+						@button.Button(button.Props{
+							Type:  "submit",
+							Class: "w-full",
+						}) {
+							Login
+						}
+						<div class="w-full max-w-sm">
+							@divider.OrDivider()
+						</div>
+						@button.Button(button.Props{
+							Variant: button.VariantLink,
+							Href:    routes.RegisterRoute,
+						}) {
+							register
+						}
 					</div>
-				}
-				@card.Footer() {
-					@button.Button(button.Props{
-						Type:  "submit",
-						Class: "w-full",
-					}) {
-						Login
-					}
 				}
 			</form>
 		}

@@ -6,6 +6,7 @@ import (
 	"pocket-goth-starter/internal/web/components/alert"
 	"pocket-goth-starter/internal/web/components/button"
 	"pocket-goth-starter/internal/web/components/card"
+	"pocket-goth-starter/internal/web/components/divider"
 	"pocket-goth-starter/internal/web/components/icon"
 	"pocket-goth-starter/internal/web/components/input"
 	"pocket-goth-starter/internal/web/components/label"
@@ -28,7 +29,7 @@ templ RegisterForm(form auth.RegisterFormValue, errorMessage string) {
 			}
 			<form method="POST" action={ routes.RegisterRoute } hx-boost="true">
 				@card.Content() {
-					<div class="flex flex-col gap-4">
+					<div class="flex flex-col gap-4 items-center">
 						<div class="w-full max-w-sm grid gap-2">
 							@label.Label(label.Props{
 								For: "email",
@@ -82,15 +83,22 @@ templ RegisterForm(form auth.RegisterFormValue, errorMessage string) {
 								}
 							}
 						}
+						@button.Button(button.Props{
+							Type:  "submit",
+							Class: "w-full",
+						}) {
+							Register
+						}
+						<div class="w-full max-w-sm">
+							@divider.OrDivider()
+						</div>
+						@button.Button(button.Props{
+							Variant: button.VariantLink,
+							Href:    routes.LoginRoute,
+						}) {
+							log in
+						}
 					</div>
-				}
-				@card.Footer() {
-					@button.Button(button.Props{
-						Type:  "submit",
-						Class: "w-full",
-					}) {
-						Register
-					}
 				}
 			</form>
 		}

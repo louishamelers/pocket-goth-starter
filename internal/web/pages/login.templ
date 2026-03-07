@@ -14,13 +14,15 @@ import (
 )
 
 templ LoginPage(errorMessage string) {
-	@components.DocType()
-	@components.Head()
-	@components.Body(LoginForm(auth.LoginFormValue{}, errorMessage))
+	<html lang="en">
+		@components.DocType()
+		@components.Head()
+		@components.Body(LoginForm(auth.LoginFormValue{}, errorMessage))
+	</html>
 }
 
 templ LoginForm(form auth.LoginFormValue, errorMessage string) {
-	<div class="w-full max-w-sm mx-auto">
+	<div class="w-full max-w-sm mx-auto h-screen flex items-center justify-center">
 		@card.Card() {
 			@card.Header() {
 				@card.Title() {

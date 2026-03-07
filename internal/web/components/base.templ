@@ -1,7 +1,10 @@
 package components
 
-import "pocket-goth-starter/internal/web/components/input"
-import "pocket-goth-starter/internal/web/components/label"
+import (
+	"pocket-goth-starter/internal/web/components/input"
+	"pocket-goth-starter/internal/web/components/label"
+	"pocket-goth-starter/internal/web/utils"
+)
 
 templ DocType() {
 	<!DOCTYPE html>
@@ -14,6 +17,7 @@ templ Head() {
 		<script src="https://unpkg.com/hyperscript.org@0.9.11"></script>
 		@input.Script()
 		@label.Script()
+		<script defer nonce={ templ.GetNonce(ctx) } src={ utils.ScriptURL("/scripts/theme.js") }></script>
 	</head>
 }
 

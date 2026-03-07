@@ -1,0 +1,67 @@
+(function () {
+  // Make theme functions globally available for the switcher
+  window.themeUtils = window.themeUtils || {};
+
+  // Get current theme preference (system, light, or dark)
+  window.themeUtils.getThemePreference = function () {
+    return localStorage.getItem("themePreference") || "system";
+  };
+
+  // Apply theme based on preference
+  window.themeUtils.applyTheme = function () {
+    const preference = window.themeUtils.getThemePreference();
+    let isDark = false;
+
+    if (preference === "system") {
+      // Use system preference
+      isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    } else {
+      // Use explicit preference
+      isDark = preference === "dark";
+    }
+
+    document.documentElement.classList.toggle("dark", isDark);
+
+    // Dispatch event for compatibility
+    document.dispatchEvent(new CustomEvent("theme-changed"));
+  };
+
+  // Toggle between light and dark (system only on initial state)
+  window.themeUtils.cycleTheme = function () {
+    const current = window.themeUtils.getThemePreference();
+    let next;
+
+    if (current === "system") {
+      // First click from system state - determine based on current appearance
+      const isDarkNow = window.matchMedia(
+        "(prefers-color-scheme: dark)",
+      ).matches;
+      next = isDarkNow ? "light" : "dark";
+    } else {
+      // Toggle between light and dark
+      next = current === "light" ? "dark" : "light";
+    }
+
+    localStorage.setItem("themePreference", next);
+    window.themeUtils.applyTheme();
+  };
+
+  // Listen for system theme changes
+  window
+    .matchMedia("(prefers-color-scheme: dark)")
+    .addEventListener("change", () => {
+      if (window.themeUtils.getThemePreference() === "system") {
+        window.themeUtils.applyTheme();
+      }
+    });
+
+  // Use event delegation for click handling
+  document.addEventListener("click", (e) => {
+    const themeSwitcher = e.target.closest("[data-theme-switcher]");
+    if (themeSwitcher) {
+      e.preventDefault();
+      window.themeUtils.cycleTheme();
+    }
+  });
+  window.themeUtils.applyTheme();
+})();

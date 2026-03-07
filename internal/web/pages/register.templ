@@ -14,13 +14,15 @@ import (
 )
 
 templ RegisterPage(errorMessage string) {
-	@components.DocType()
-	@components.Head()
-	@components.Body(RegisterForm(auth.RegisterFormValue{}, errorMessage))
+	<html lang="en">
+		@components.DocType()
+		@components.Head()
+		@components.Body(RegisterForm(auth.RegisterFormValue{}, errorMessage))
+	</html>
 }
 
 templ RegisterForm(form auth.RegisterFormValue, errorMessage string) {
-	<div class="w-full max-w-sm mx-auto">
+	<div class="w-full max-w-sm mx-auto h-screen flex items-center justify-center">
 		@card.Card() {
 			@card.Header() {
 				@card.Title() {

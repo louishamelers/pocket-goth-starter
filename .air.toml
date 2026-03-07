@@ -17,7 +17,7 @@ bin = "./tmp/main"
 
 # Ignore these filename extensions or directories.
 exclude_regex =["_templ\\.go"]
-include_ext = ["templ", "go"]
+include_ext = ["templ", "go", "js"]
 
 args_bin = ["serve","--dir=.state/pb_data"]
 

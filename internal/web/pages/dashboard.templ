@@ -8,13 +8,15 @@ import (
 )
 
 templ DashboardPage() {
-	@components.DocType()
-	@components.Head()
-	@components.Body(Dashboard())
+	<html lang="en">
+		@components.DocType()
+		@components.Head()
+		@components.Body(Dashboard())
+	</html>
 }
 
 templ Dashboard() {
-	<div class="w-full max-w-sm mx-auto">
+	<div class="w-full max-w-sm mx-auto h-screen flex items-center justify-center">
 		@card.Card() {
 			@card.Header() {
 				@card.Title() {

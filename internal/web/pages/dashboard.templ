@@ -1,0 +1,42 @@
+package pages
+
+import (
+	"pocket-goth-starter/internal/web/components"
+	"pocket-goth-starter/internal/web/components/button"
+	"pocket-goth-starter/internal/web/components/card"
+	"pocket-goth-starter/internal/web/routes"
+)
+
+templ DashboardPage() {
+	<html lang="en">
+		@components.DocType()
+		@components.Head()
+		@components.Body(Dashboard())
+	</html>
+}
+
+templ Dashboard() {
+	<div class="w-full max-w-sm mx-auto h-screen flex items-center justify-center">
+		@card.Card() {
+			@card.Header() {
+				@card.Title() {
+					Welcome
+				}
+				@card.Description() {
+					Into this application!
+				}
+			}
+			@card.Content() {
+				<form method="post" action={ routes.LogoutRoute } hx-boost="true">
+					@button.Button(button.Props{
+						Class:   "w-full",
+						Type:    "submit",
+						Variant: button.VariantDestructive,
+					}) {
+						Logout
+					}
+				</form>
+			}
+		}
+	</div>
+}

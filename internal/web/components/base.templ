@@ -1,5 +1,11 @@
 package components
 
+import (
+	"pocket-goth-starter/internal/web/components/input"
+	"pocket-goth-starter/internal/web/components/label"
+	"pocket-goth-starter/internal/web/utils"
+)
+
 templ DocType() {
 	<!DOCTYPE html>
 }
@@ -9,11 +15,18 @@ templ Head() {
 		<link rel="stylesheet" href="/tailwind.css"/>
 		<script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
 		<script src="https://unpkg.com/hyperscript.org@0.9.11"></script>
+		@input.Script()
+		@label.Script()
+		@script()
 	</head>
 }
 
 templ Body(component templ.Component) {
-	<body class="bg-white px-6 w-full flex flex-col relative">
+	<body>
 		@component
 	</body>
+}
+
+templ script() {
+	<script nonce={ templ.GetNonce(ctx) } src={ utils.ScriptURL("/scripts/theme.js") }></script>
 }

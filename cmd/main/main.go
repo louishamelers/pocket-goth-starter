@@ -3,10 +3,11 @@ package main
 import (
 	"log"
 	"os"
-	middleware "pocket-goth-starter/internal/web/middleware"
-	dashboardPage "pocket-goth-starter/internal/web/pages/dashboard"
-	loginPage "pocket-goth-starter/internal/web/pages/login"
-	registerPage "pocket-goth-starter/internal/web/pages/register"
+	"pocket-goth-starter/internal/web/auth"
+	"pocket-goth-starter/internal/web/handlers"
+	"pocket-goth-starter/internal/web/middleware"
+	"pocket-goth-starter/internal/web/pages"
+	"pocket-goth-starter/internal/web/routes"
 	"pocket-goth-starter/internal/web/utils"
 
 	"github.com/pocketbase/pocketbase"
@@ -22,8 +23,7 @@ func main() {
 		// TODO: remove /tmp/
 		e.Router.GET("/{path...}", apis.Static(os.DirFS("./tmp/pb_public"), false))
 
-		initAuthRoutes(e)
-		initAppRoutes(e)
+		initRoutes(e)
 
 		return e.Next()
 	})
@@ -33,24 +33,15 @@ func main() {
 	}
 }
 
-func initAuthRoutes(e *core.ServeEvent) {
-	authGroup := e.Router.Group("/auth")
+func initRoutes(e *core.ServeEvent) {
+	unAuthGroup := e.Router.Group("").BindFunc(middleware.UnAuthGuard)
+	unAuthGroup.GET(routes.LoginRoute, handlers.HandleLogin())
+	unAuthGroup.POST(routes.LoginRoute, auth.PostLogin)
+	unAuthGroup.GET(routes.RegisterRoute, handlers.HandleRegister())
+	unAuthGroup.POST(routes.RegisterRoute, auth.PostRegister)
 
-	// Register
-	authGroup.GET("/register", utils.RenderRoute(registerPage.RegisterPage))
-	authGroup.POST("/register", registerPage.PostRegisterRoute)
+	e.Router.POST(routes.LogoutRoute, auth.PostLogout)
 
-	// Login
-	authGroup.GET("/login", utils.RenderRoute(loginPage.LoginPage))
-	authGroup.POST("/login", loginPage.PostLoginRoute)
-
-	// Logout
-	authGroup.POST("/logout", registerPage.PostLogoutRoute)
-}
-
-func initAppRoutes(e *core.ServeEvent) {
-	appGroup := e.Router.Group("/app").BindFunc(middleware.LoadAuthContext, middleware.AuthGuard)
-
-	// Dashboard
-	appGroup.GET("/dashboard", utils.RenderRoute(dashboardPage.DashboardPage))
+	authGroup := e.Router.Group("").BindFunc(middleware.LoadAuthContext, middleware.AuthGuard)
+	authGroup.GET(routes.DashboardRoute, utils.RenderRoute(pages.DashboardPage))
 }

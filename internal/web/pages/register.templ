@@ -1,0 +1,105 @@
+package pages
+
+import (
+	"pocket-goth-starter/internal/web/auth"
+	"pocket-goth-starter/internal/web/components"
+	"pocket-goth-starter/internal/web/components/alert"
+	"pocket-goth-starter/internal/web/components/button"
+	"pocket-goth-starter/internal/web/components/card"
+	"pocket-goth-starter/internal/web/components/divider"
+	"pocket-goth-starter/internal/web/components/icon"
+	"pocket-goth-starter/internal/web/components/input"
+	"pocket-goth-starter/internal/web/components/label"
+	"pocket-goth-starter/internal/web/routes"
+)
+
+templ RegisterPage(errorMessage string) {
+	<html lang="en">
+		@components.DocType()
+		@components.Head()
+		@components.Body(RegisterForm(auth.RegisterFormValue{}, errorMessage))
+	</html>
+}
+
+templ RegisterForm(form auth.RegisterFormValue, errorMessage string) {
+	<div class="w-full max-w-sm mx-auto h-screen flex items-center justify-center">
+		@card.Card() {
+			@card.Header() {
+				@card.Title() {
+					Register
+				}
+			}
+			<form method="POST" action={ routes.RegisterRoute } hx-boost="true">
+				@card.Content() {
+					<div class="flex flex-col gap-4 items-center">
+						<div class="w-full max-w-sm grid gap-2">
+							@label.Label(label.Props{
+								For: "email",
+							}) {
+								Email
+							}
+							@input.Input(input.Props{
+								ID:          "email",
+								Name:        "email",
+								Placeholder: "example@email.com",
+								Value:       form.Email,
+								Type:        "email",
+							})
+						</div>
+						<div class="w-full max-w-sm grid gap-2">
+							@label.Label(label.Props{
+								For: "password",
+							}) {
+								Password
+							}
+							@input.Input(input.Props{
+								ID:          "password",
+								Name:        "password",
+								Placeholder: "*******",
+								Value:       form.Password,
+								Type:        "password",
+							})
+						</div>
+						<div class="w-full max-w-sm grid gap-2">
+							@label.Label(label.Props{
+								For: "passwordRepeat",
+							}) {
+								Repeat Password
+							}
+							@input.Input(input.Props{
+								ID:          "passwordRepeat",
+								Name:        "passwordRepeat",
+								Placeholder: "*******",
+								Value:       form.PasswordRepeat,
+								Type:        "password",
+							})
+						</div>
+						if errorMessage != "" {
+							@alert.Alert(alert.Props{Variant: alert.VariantDestructive}) {
+								@icon.TriangleAlert()
+								@alert.Title() {
+									Error
+								}
+								@alert.Description() {
+									{ errorMessage }
+								}
+							}
+						}
+						@button.Button(button.Props{
+							Type:  "submit",
+							Class: "w-full",
+						}) {
+							Register
+						}
+						<div class="w-full max-w-sm">
+							@divider.OrDivider()
+						</div>
+						<p class="text-center text-sm text-muted-foreground mx-auto max-w-7xl">
+							Already have an account?{ " " }<a href={ routes.LoginRoute } class="text-primary underline underline-offset-4">Log in</a>.
+						</p>
+					</div>
+				}
+			</form>
+		}
+	</div>
+}

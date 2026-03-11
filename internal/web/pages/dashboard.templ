@@ -7,15 +7,15 @@ import (
 	"pocket-goth-starter/internal/web/routes"
 )
 
-templ DashboardPage() {
+templ DashboardPage(accountEmail string) {
 	<html lang="en">
 		@components.DocType()
 		@components.Head()
-		@components.Body(Dashboard())
+		@components.Body(Dashboard(accountEmail))
 	</html>
 }
 
-templ Dashboard() {
+templ Dashboard(accountEmail string) {
 	<div class="w-full max-w-sm mx-auto h-screen flex items-center justify-center">
 		@card.Card() {
 			@card.Header() {
@@ -24,6 +24,7 @@ templ Dashboard() {
 				}
 				@card.Description() {
 					Into this application!
+					Your email is { accountEmail }
 				}
 			}
 			@card.Content() {

@@ -1,8 +1,8 @@
 package handlers
 
 import (
-	"pocket-goth-starter/internal/web/pages"
-	"pocket-goth-starter/internal/web/utils"
+	"pocket-goth-starter/internal/web/ui/pages"
+	"pocket-goth-starter/internal/web/ui/utils"
 
 	"github.com/pocketbase/pocketbase/core"
 )

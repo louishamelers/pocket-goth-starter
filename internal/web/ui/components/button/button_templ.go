@@ -13,7 +13,7 @@ import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
 import (
-	"pocket-goth-starter/internal/web/utils"
+	"pocket-goth-starter/internal/web/ui/utils"
 	"strings"
 )
 

@@ -11,7 +11,7 @@ import templruntime "github.com/a-h/templ/runtime"
 import (
 	"pocket-goth-starter/internal/web/ui/components/input"
 	"pocket-goth-starter/internal/web/ui/components/label"
-	"pocket-goth-starter/internal/web/utils"
+	"pocket-goth-starter/internal/web/ui/utils"
 )
 
 func DocType() templ.Component {

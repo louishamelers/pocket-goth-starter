@@ -15,7 +15,7 @@ import templruntime "github.com/a-h/templ/runtime"
 import (
 	"pocket-goth-starter/internal/web/ui/components/button"
 	"pocket-goth-starter/internal/web/ui/components/icon"
-	"pocket-goth-starter/internal/web/utils"
+	"pocket-goth-starter/internal/web/ui/utils"
 )
 
 type Type string

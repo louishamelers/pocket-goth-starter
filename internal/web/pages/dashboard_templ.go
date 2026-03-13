@@ -9,10 +9,10 @@ import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
 import (
-	"pocket-goth-starter/internal/web/components"
-	"pocket-goth-starter/internal/web/components/button"
-	"pocket-goth-starter/internal/web/components/card"
 	"pocket-goth-starter/internal/web/routes"
+	"pocket-goth-starter/internal/web/ui/components"
+	"pocket-goth-starter/internal/web/ui/components/button"
+	"pocket-goth-starter/internal/web/ui/components/card"
 )
 
 func DashboardPage(accountEmail string) templ.Component {

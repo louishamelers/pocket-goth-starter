@@ -10,15 +10,15 @@ import templruntime "github.com/a-h/templ/runtime"
 
 import (
 	"pocket-goth-starter/internal/web/auth"
-	"pocket-goth-starter/internal/web/components"
-	"pocket-goth-starter/internal/web/components/alert"
-	"pocket-goth-starter/internal/web/components/button"
-	"pocket-goth-starter/internal/web/components/card"
-	"pocket-goth-starter/internal/web/components/divider"
-	"pocket-goth-starter/internal/web/components/icon"
-	"pocket-goth-starter/internal/web/components/input"
-	"pocket-goth-starter/internal/web/components/label"
 	"pocket-goth-starter/internal/web/routes"
+	"pocket-goth-starter/internal/web/ui/components"
+	"pocket-goth-starter/internal/web/ui/components/alert"
+	"pocket-goth-starter/internal/web/ui/components/button"
+	"pocket-goth-starter/internal/web/ui/components/card"
+	"pocket-goth-starter/internal/web/ui/components/divider"
+	"pocket-goth-starter/internal/web/ui/components/icon"
+	"pocket-goth-starter/internal/web/ui/components/input"
+	"pocket-goth-starter/internal/web/ui/components/label"
 )
 
 func LoginPage(errorMessage string) templ.Component {
